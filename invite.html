@@ -12,16 +12,24 @@
     <div class="blob b2"></div>
     <div class="blob b3"></div>
     <div class="sparkle-layer"></div>
+
+    <div class="floaters" aria-hidden="true">
+      <span class="floater f1">💗</span>
+      <span class="floater f2">✨</span>
+      <span class="floater f3">🎀</span>
+      <span class="floater f4">💞</span>
+      <span class="floater f5">🌙</span>
+    </div>
   </div>
 
   <main class="wrap">
-    <section class="card">
+    <section class="card lift">
       <h1 class="title small">Iftar with Mimi 💗</h1>
-      <p class="lead">Pick a date you’re free (23–27 Feb). No pressure. Just vibes 😭🍽️</p>
+      <p class="lead">Pick a date you’re free babee 😌</p>
 
-      <!-- NOTE: We'll submit with JS to avoid leaving your site -->
       <form id="iftarForm" class="form">
-        <div class="grid">
+        <!-- Responsive grid: auto-fit ensures pretty on Android + desktop -->
+        <div class="grid pretty-grid">
           <label class="chip">
             <input type="radio" name="selected_date" value="23 February" required>
             <span class="chip-ui">
@@ -63,22 +71,40 @@
           </label>
         </div>
 
-        <button class="btn" type="submit" id="confirmBtn">
+        <button class="btn shimmer" type="submit" id="confirmBtn">
           Confirm 💗
           <span class="btn-glow"></span>
         </button>
 
         <p class="mini" id="response"></p>
-        <p class="tiny">ps: if you can’t decide, just pick the cutest number 😭🎀</p>
 
         <a class="link" href="index.html">← back</a>
       </form>
     </section>
   </main>
 
+  <!-- walking kitty -->
+  <div class="walker" aria-hidden="true">
+    <div class="kitty alt">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
+      <div class="head"></div>
+      <div class="face">
+        <span class="eye"></span><span class="eye"></span>
+        <span class="nose"></span>
+      </div>
+      <div class="body"></div>
+      <div class="tail"></div>
+      <div class="paw p1"></div>
+      <div class="paw p2"></div>
+      <div class="paw p3"></div>
+      <div class="paw p4"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
-    // Submit to Formspree in the background (so Formspree page doesn't show)
+    // silent submit to Formspree (no Formspree "Thanks" page)
     const FORM_ENDPOINT = "https://formspree.io/f/mnjbbbwr";
 
     const form = document.getElementById('iftarForm');
@@ -90,17 +116,15 @@
 
       const selected = document.querySelector('input[name="selected_date"]:checked');
       if (!selected) {
-        resp.textContent = "Pick a date first bestie 😭🌙";
+        resp.textContent = "Pick a date first 😭🌙";
         return;
       }
 
-      // UI feedback
       resp.textContent = `Sending… (${selected.value}) 💌`;
       btn.disabled = true;
       btn.classList.add('disabled');
       if (window.popSparkles) window.popSparkles();
 
-      // Build form data
       const data = new FormData();
       data.append("selected_date", selected.value);
       data.append("_subject", "🌙 Asha's Iftar Date Response");
@@ -113,15 +137,14 @@
         });
 
         if (r.ok) {
-          // Go to your own success page (no Formspree thanks page)
           window.location.href = "success.html";
         } else {
-          resp.textContent = "Hmm, it didn’t send 😭 Try again in a sec.";
+          resp.textContent = "It didn’t send 🥲 try again!";
           btn.disabled = false;
           btn.classList.remove('disabled');
         }
-      } catch (err) {
-        resp.textContent = "Network issue 🥲 Try again when your internet is okay.";
+      } catch {
+        resp.textContent = "Network issue 🥲 try again later!";
         btn.disabled = false;
         btn.classList.remove('disabled');
       }
