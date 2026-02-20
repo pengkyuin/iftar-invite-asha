@@ -8,38 +8,29 @@
 </head>
 <body class="page">
   <div class="bg">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="orb orb-c"></div>
-    <div class="stars"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="sparkle-layer"></div>
   </div>
 
   <main class="wrap">
     <section class="card hero">
-      <div class="tag">💗 besties only • pastel edition</div>
-
       <h1 class="title">
         Asha ✨
-        <span class="title-sub">you’ve been summoned for iftar</span>
+        <span class="title-sub">you’ve been summoned for iftar 🌙</span>
       </h1>
 
       <p class="lead">
-        Official invitation from <b>Mimi</b> (professional yapper & certified hungry person) 🍜
+        Official invitation from <b>your beloved bestiee</b> 😘
       </p>
-
-      <div class="seal">
-        <span class="seal-dot"></span>
-        <span>Tap to unlock</span>
-      </div>
 
       <button class="btn big" id="unlockBtn" type="button">
         Open Invitation 🌙
         <span class="btn-glow"></span>
       </button>
 
-      <p class="mini">
-        IT-student feature: this invite has ✨ unnecessary animations ✨
-      </p>
+      <p class="mini">ps: there are sparkles because I can 😤💗</p>
     </section>
 
     <footer class="foot">
@@ -49,10 +40,9 @@
 
   <script src="script.js"></script>
   <script>
-    // Cute unlock animation then go to invite page
     document.getElementById('unlockBtn').addEventListener('click', () => {
       if (window.popSparkles) window.popSparkles();
-      setTimeout(() => window.location.href = 'invite.html', 500);
+      setTimeout(() => window.location.href = 'invite.html', 350);
     });
   </script>
 </body>
