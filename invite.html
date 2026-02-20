@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iftar RSVP 🌙</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="page">
+  <div class="bg">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="stars"></div>
+  </div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="tag">🌙 iftar date selection • besties mode</div>
+
+      <h1 class="title small">Iftar with Mimi 💗</h1>
+      <p class="lead">Pick a date you’re free (23–27 Feb). I’ll follow up with location + food plans 🍽️</p>
+
+      <form id="iftarForm" class="form" action="https://formspree.io/f/mnjbbbwr" method="POST">
+        <div class="choices">
+          <label class="choice">
+            <input type="radio" name="selected_date" value="23 February" required>
+            <span class="pill">23 Feb</span>
+            <span class="hint">weekend-ish vibes</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="selected_date" value="24 February">
+            <span class="pill">24 Feb</span>
+            <span class="hint">calm & cute</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="selected_date" value="25 February">
+            <span class="pill">25 Feb</span>
+            <span class="hint">midweek treat</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="selected_date" value="26 February">
+            <span class="pill">26 Feb</span>
+            <span class="hint">we deserve food</span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="selected_date" value="27 February">
+            <span class="pill">27 Feb</span>
+            <span class="hint">friday mood 🎀</span>
+          </label>
+        </div>
+
+        <!-- Cute email subject -->
+        <input type="hidden" name="_subject" value="🌙 Asha's Iftar Date Response">
+        <!-- Redirect to success page after submit -->
+        <input type="hidden" name="_next" value="success.html">
+
+        <button class="btn" type="submit">
+          Confirm 💗
+          <span class="btn-glow"></span>
+        </button>
+
+        <p class="mini" id="response"></p>
+        <p class="tiny">ps: approved by Mimi’s hunger committee 🍜</p>
+      </form>
+
+      <a class="link" href="index.html">← back to welcome</a>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Friendly on-page feedback + sparkles (Form still submits normally)
+    const form = document.getElementById('iftarForm');
+    form.addEventListener('submit', (e) => {
+      const selected = document.querySelector('input[name="selected_date"]:checked');
+      const resp = document.getElementById('response');
+
+      if(!selected){
+        e.preventDefault();
+        resp.textContent = "Pick a date first bestie 😭🌙";
+        return;
+      }
+
+      resp.textContent = `YAYYY 🥺 saving: ${selected.value} 🍽️💗`;
+      if (window.popSparkles) window.popSparkles();
+    });
+  </script>
+</body>
+</html>
