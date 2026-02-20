@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RSVP Received 💗</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="page">
+  <div class="bg">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="stars"></div>
+  </div>
+
+  <main class="wrap">
+    <section class="card hero">
+      <div class="tag">🎉 received!</div>
+      <h1 class="title">YAYYYY Asha 🥺💗</h1>
+      <p class="lead">
+        Your date choice is sent to Mimi already.<br/>
+        See you for iftar!!! 🌙🍽️✨
+      </p>
+
+      <button class="btn big" type="button" onclick="window.location.href='index.html'">
+        Back to Home 🎀
+        <span class="btn-glow"></span>
+      </button>
+
+      <p class="mini">Now go drink water bestie. Hydration is sunnah 😤🫶</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      if (window.launchConfetti) window.launchConfetti();
+    });
+  </script>
+</body>
+</html>
