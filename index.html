@@ -12,10 +12,19 @@
     <div class="blob b2"></div>
     <div class="blob b3"></div>
     <div class="sparkle-layer"></div>
+
+    <!-- floating hearts -->
+    <div class="floaters" aria-hidden="true">
+      <span class="floater f1">💗</span>
+      <span class="floater f2">✨</span>
+      <span class="floater f3">🎀</span>
+      <span class="floater f4">💞</span>
+      <span class="floater f5">🌙</span>
+    </div>
   </div>
 
   <main class="wrap">
-    <section class="card hero">
+    <section class="card hero lift">
       <h1 class="title">
         Asha ✨
         <span class="title-sub">you’ve been summoned for iftar 🌙</span>
@@ -25,12 +34,10 @@
         Official invitation from <b>your beloved bestiee</b> 😘
       </p>
 
-      <button class="btn big" id="unlockBtn" type="button">
+      <button class="btn big shimmer" id="unlockBtn" type="button">
         Open Invitation 🌙
         <span class="btn-glow"></span>
       </button>
-
-      <p class="mini">ps: there are sparkles because I can 😤💗</p>
     </section>
 
     <footer class="foot">
@@ -38,11 +45,30 @@
     </footer>
   </main>
 
+  <!-- walking kitty -->
+  <div class="walker" aria-hidden="true">
+    <div class="kitty">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
+      <div class="head"></div>
+      <div class="face">
+        <span class="eye"></span><span class="eye"></span>
+        <span class="nose"></span>
+      </div>
+      <div class="body"></div>
+      <div class="tail"></div>
+      <div class="paw p1"></div>
+      <div class="paw p2"></div>
+      <div class="paw p3"></div>
+      <div class="paw p4"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
     document.getElementById('unlockBtn').addEventListener('click', () => {
       if (window.popSparkles) window.popSparkles();
-      setTimeout(() => window.location.href = 'invite.html', 350);
+      setTimeout(() => window.location.href = 'invite.html', 320);
     });
   </script>
 </body>
