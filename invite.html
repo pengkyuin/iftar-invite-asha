@@ -8,86 +8,123 @@
 </head>
 <body class="page">
   <div class="bg">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="orb orb-c"></div>
-    <div class="stars"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="sparkle-layer"></div>
   </div>
 
   <main class="wrap">
     <section class="card">
-      <div class="tag">🌙 iftar date selection • besties mode</div>
-
       <h1 class="title small">Iftar with Mimi 💗</h1>
-      <p class="lead">Pick a date you’re free (23–27 Feb). I’ll follow up with location + food plans 🍽️</p>
+      <p class="lead">Pick a date you’re free (23–27 Feb). No pressure. Just vibes 😭🍽️</p>
 
-      <form id="iftarForm" class="form" action="https://formspree.io/f/mnjbbbwr" method="POST">
-        <div class="choices">
-          <label class="choice">
+      <!-- NOTE: We'll submit with JS to avoid leaving your site -->
+      <form id="iftarForm" class="form">
+        <div class="grid">
+          <label class="chip">
             <input type="radio" name="selected_date" value="23 February" required>
-            <span class="pill">23 Feb</span>
-            <span class="hint">weekend-ish vibes</span>
+            <span class="chip-ui">
+              <span class="chip-day">23</span>
+              <span class="chip-month">Feb</span>
+            </span>
           </label>
 
-          <label class="choice">
+          <label class="chip">
             <input type="radio" name="selected_date" value="24 February">
-            <span class="pill">24 Feb</span>
-            <span class="hint">calm & cute</span>
+            <span class="chip-ui">
+              <span class="chip-day">24</span>
+              <span class="chip-month">Feb</span>
+            </span>
           </label>
 
-          <label class="choice">
+          <label class="chip">
             <input type="radio" name="selected_date" value="25 February">
-            <span class="pill">25 Feb</span>
-            <span class="hint">midweek treat</span>
+            <span class="chip-ui">
+              <span class="chip-day">25</span>
+              <span class="chip-month">Feb</span>
+            </span>
           </label>
 
-          <label class="choice">
+          <label class="chip">
             <input type="radio" name="selected_date" value="26 February">
-            <span class="pill">26 Feb</span>
-            <span class="hint">we deserve food</span>
+            <span class="chip-ui">
+              <span class="chip-day">26</span>
+              <span class="chip-month">Feb</span>
+            </span>
           </label>
 
-          <label class="choice">
+          <label class="chip">
             <input type="radio" name="selected_date" value="27 February">
-            <span class="pill">27 Feb</span>
-            <span class="hint">friday mood 🎀</span>
+            <span class="chip-ui">
+              <span class="chip-day">27</span>
+              <span class="chip-month">Feb</span>
+            </span>
           </label>
         </div>
 
-        <!-- Cute email subject -->
-        <input type="hidden" name="_subject" value="🌙 Asha's Iftar Date Response">
-        <!-- Redirect to success page after submit -->
-        <input type="hidden" name="_next" value="success.html">
-
-        <button class="btn" type="submit">
+        <button class="btn" type="submit" id="confirmBtn">
           Confirm 💗
           <span class="btn-glow"></span>
         </button>
 
         <p class="mini" id="response"></p>
-        <p class="tiny">ps: approved by Mimi’s hunger committee 🍜</p>
-      </form>
+        <p class="tiny">ps: if you can’t decide, just pick the cutest number 😭🎀</p>
 
-      <a class="link" href="index.html">← back to welcome</a>
+        <a class="link" href="index.html">← back</a>
+      </form>
     </section>
   </main>
 
   <script src="script.js"></script>
   <script>
-    // Friendly on-page feedback + sparkles (Form still submits normally)
-    const form = document.getElementById('iftarForm');
-    form.addEventListener('submit', (e) => {
-      const selected = document.querySelector('input[name="selected_date"]:checked');
-      const resp = document.getElementById('response');
+    // Submit to Formspree in the background (so Formspree page doesn't show)
+    const FORM_ENDPOINT = "https://formspree.io/f/mnjbbbwr";
 
-      if(!selected){
-        e.preventDefault();
+    const form = document.getElementById('iftarForm');
+    const resp = document.getElementById('response');
+    const btn = document.getElementById('confirmBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const selected = document.querySelector('input[name="selected_date"]:checked');
+      if (!selected) {
         resp.textContent = "Pick a date first bestie 😭🌙";
         return;
       }
 
-      resp.textContent = `YAYYY 🥺 saving: ${selected.value} 🍽️💗`;
+      // UI feedback
+      resp.textContent = `Sending… (${selected.value}) 💌`;
+      btn.disabled = true;
+      btn.classList.add('disabled');
       if (window.popSparkles) window.popSparkles();
+
+      // Build form data
+      const data = new FormData();
+      data.append("selected_date", selected.value);
+      data.append("_subject", "🌙 Asha's Iftar Date Response");
+
+      try {
+        const r = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (r.ok) {
+          // Go to your own success page (no Formspree thanks page)
+          window.location.href = "success.html";
+        } else {
+          resp.textContent = "Hmm, it didn’t send 😭 Try again in a sec.";
+          btn.disabled = false;
+          btn.classList.remove('disabled');
+        }
+      } catch (err) {
+        resp.textContent = "Network issue 🥲 Try again when your internet is okay.";
+        btn.disabled = false;
+        btn.classList.remove('disabled');
+      }
     });
   </script>
 </body>
